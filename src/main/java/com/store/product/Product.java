@@ -7,11 +7,11 @@ import jakarta.persistence.*;
 public class Product {
     @Id
     @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence"
+            name = "product_sequence",
+            sequenceName = "product_sequence"
     )
     @GeneratedValue(
-            generator = "student_sequence",
+            generator = "product_sequence",
             strategy = GenerationType.SEQUENCE
     )
     private Long id;
