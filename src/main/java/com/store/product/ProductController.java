@@ -16,15 +16,16 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
+    @GetMapping(path = "products")
     public List<Product> getProducts(){
         return productService.getProducts();
     }
 
-    @PostMapping
+    @PostMapping(path = "createproduct")
     public void addNewProduct(@RequestBody Product product){
         productService.addProduct(product);
     }
+
 
     @DeleteMapping(path = "{productId}")
     public void deleteProduct(@PathVariable("productId") Long productId){

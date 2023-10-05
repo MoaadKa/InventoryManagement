@@ -20,10 +20,10 @@ public class Stock {
     )
     private Long id;
 
+    private Integer quantity;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
-
-    private Integer quantity;
 
     public Stock() {
     }

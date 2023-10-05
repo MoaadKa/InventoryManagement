@@ -16,12 +16,12 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping
+    @GetMapping(path = "clients")
     public List<Client> getClients(){
         return clientService.getClients();
     }
 
-    @PostMapping
+    @PostMapping(path = "createClient")
     public void addClient(Client client){
         clientService.addClient(client);
     }

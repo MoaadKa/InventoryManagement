@@ -16,12 +16,12 @@ public class ProviderController {
         this.providerService = providerService;
     }
 
-    @GetMapping
+    @GetMapping(path = "providers")
     public List<Provider> getProviders(){
         return providerService.getProviders();
     }
 
-    @PostMapping
+    @PostMapping(path = "createprovider")
     public void addProvider(@RequestBody Provider provider){
         providerService.addProvider(provider);
     }

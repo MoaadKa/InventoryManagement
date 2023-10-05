@@ -17,12 +17,12 @@ public class StockController {
         this.stockService = stockService;
     }
 
-    @GetMapping
+    @GetMapping(path = "stocks")
     public List<Stock> getStocks(){
         return stockService.getStocks();
     }
 
-    @PostMapping
+    @PostMapping(path = "createstock")
     public void addStock(Stock stock){
         stockService.addStock(stock);
     }
