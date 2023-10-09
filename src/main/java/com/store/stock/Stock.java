@@ -22,14 +22,14 @@ public class Stock {
 
     private Integer quantity;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Product product;
 
     public Stock() {
     }
 
-    public Stock(List<Product> products, Integer quantity) {
-        this.products = products;
+    public Stock(Product product, Integer quantity) {
+        this.product = product;
         this.quantity = quantity;
     }
 
@@ -41,14 +41,6 @@ public class Stock {
         this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     public Integer getQuantity() {
         return quantity;
     }
@@ -57,25 +49,23 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    public void addProduct(Product product){
-        if (!products.contains(product)){
-            products.add(product);
-        }
+    public Product getProduct() {
+        return product;
     }
 
-    public void removeProduct(Product product){
-        products.remove(product);
+    public void setProduct(Product product) {
+        this.product = product;
     }
+
 
     @Override
     public String toString() {
         return "Stock{" +
                 "id=" + id +
-                ", products=" + products +
                 ", quantity=" + quantity +
+                ", product=" + product +
                 '}';
     }
-
 }
 
 

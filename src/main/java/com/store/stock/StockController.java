@@ -22,9 +22,13 @@ public class StockController {
         return stockService.getStocks();
     }
 
-    @PostMapping(path = "createstock")
-    public void addStock(Stock stock){
+    @PostMapping(path = "create-stock")
+    public void addStock(@RequestBody Stock stock){
+        System.out.println("inserting stock");
+        System.out.println(stock);
         stockService.addStock(stock);
+
+        System.out.println("after stock was insrted");
     }
 
     @DeleteMapping(path = "{stockId}")

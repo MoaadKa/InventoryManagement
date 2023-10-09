@@ -21,7 +21,7 @@ public class ProviderController {
         return providerService.getProviders();
     }
 
-    @PostMapping(path = "createprovider")
+    @PostMapping(path = "create-provider")
     public void addProvider(@RequestBody Provider provider){
         providerService.addProvider(provider);
     }

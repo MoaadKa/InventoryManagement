@@ -1,6 +1,5 @@
 package com.store.stock;
 
-import com.store.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +37,17 @@ public class StockService {
                 () -> new IllegalStateException("Not Found")
         );
         stock.setQuantity(quantity);
+    }
+
+    public void updateQuantity(Long stockId, Integer movementQuantity) {
+
+        // getting the stock by its id
+        Stock stock = stockRepository.getReferenceById(stockId);
+        // getting the existing quantity
+        Integer oldQuantity = stock.getQuantity();
+        Integer newQuantity = oldQuantity + movementQuantity;
+        // adding the new quantity from the provider
+        stock.setQuantity(newQuantity);
+        stockRepository.save(stock);
     }
 }
