@@ -39,7 +39,7 @@ public class StockService {
         stock.setQuantity(quantity);
     }
 
-    public void updateQuantity(Long stockId, Integer movementQuantity) {
+    public void providerQuantity(Long stockId, Integer movementQuantity) {
 
         // getting the stock by its id
         Stock stock = stockRepository.getReferenceById(stockId);
@@ -48,6 +48,21 @@ public class StockService {
         Integer newQuantity = oldQuantity + movementQuantity;
         // adding the new quantity from the provider
         stock.setQuantity(newQuantity);
+        stockRepository.save(stock);
+    }
+
+    public void clientQuantity(Long stockId, Integer movementQuantity) {
+
+        // getting the stock by its id
+        Stock stock = stockRepository.getReferenceById(stockId);
+        // getting the existing quantity
+        Integer oldQuantity = stock.getQuantity();
+       // checking if we have enough in stock
+        Integer newQuantity = oldQuantity - movementQuantity;
+        if (newQuantity >= 0){
+            stock.setQuantity(newQuantity);
+        }
+        else throw new IllegalStateException("Not enough product in stock");
         stockRepository.save(stock);
     }
 }

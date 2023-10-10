@@ -21,7 +21,17 @@ public class StockMovementController {
             @RequestParam(name = "stock_id") Long stockId,
             @RequestParam(name = "movement_quantity") Integer movementQuantity
     ){
-        System.out.println(providerId + " "  + stockId + " " + movementQuantity);
-        stockService.updateQuantity(stockId, movementQuantity);
+        stockService.providerQuantity(stockId, movementQuantity);
     }
+
+    @PostMapping(path = "client-action")
+    public void clientAction(
+            @RequestParam(name = "client_id") Long clientId,
+            @RequestParam(name = "stock_id") Long stockId,
+            @RequestParam(name = "movement_quantity") Integer movementQuantity
+    ){
+        stockService.clientQuantity(stockId, movementQuantity);
+    }
+
+
 }
