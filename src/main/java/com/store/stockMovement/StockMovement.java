@@ -1,7 +1,12 @@
 package com.store.stockMovement;
 
+import com.store.client.Client;
 import com.store.provider.Provider;
+import com.store.stock.Stock;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "StockMovement")
 @Table(name = "stock_movement")
@@ -17,10 +22,19 @@ public class StockMovement {
             strategy = GenerationType.SEQUENCE
     )
     private Long id;
-    private Integer movementQuantity;
+
+    @OneToMany(
+            cascade = CascadeType.MERGE
+    )
+    @JoinColumn(
+            name = "stock_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "stock_id_fk")
+    )
+    private List<Stock> stocks = new ArrayList<>();
 
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.MERGE
     )
     @JoinColumn(
             name = "provider_id",
@@ -29,12 +43,23 @@ public class StockMovement {
     )
     private Provider provider;
 
+    @ManyToOne(
+            cascade = CascadeType.MERGE
+    )
+    @JoinColumn(
+            name = "client_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "client_id_fk")
+    )
+    private Client client;
+
     public StockMovement() {
     }
 
-    public StockMovement(Integer movementQuantity, Provider provider) {
-        this.movementQuantity = movementQuantity;
+    public StockMovement(List<Stock> stocks, Provider provider, Client client) {
+        this.stocks = stocks;
         this.provider = provider;
+        this.client = client;
     }
 
     public Long getId() {
@@ -45,13 +70,6 @@ public class StockMovement {
         this.id = id;
     }
 
-    public Integer getMovementQuantity() {
-        return movementQuantity;
-    }
-
-    public void setMovementQuantity(Integer movementQuantity) {
-        this.movementQuantity = movementQuantity;
-    }
 
     public Provider getProvider() {
         return provider;
@@ -61,12 +79,29 @@ public class StockMovement {
         this.provider = provider;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<Stock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(List<Stock> stocks) {
+        this.stocks = stocks;
+    }
+
     @Override
     public String toString() {
         return "StockMovement{" +
                 "id=" + id +
-                ", movementQuantity=" + movementQuantity +
+                ", stocks=" + stocks +
                 ", provider=" + provider +
+                ", client=" + client +
                 '}';
     }
 }
