@@ -63,6 +63,18 @@ public class StockMovementController {
         }
         stockMovementRepository.save(stockMovement);
     }
+
+    @PostMapping(path = "client-purchase")
+    public void clientPurchase(@RequestBody StockMovementDTO stockMovementDTO){
+        StockMovement stockMovement = new StockMovement();
+        stockMovement.setId(stockMovementDTO.getId());
+        List<StockDTO> stockDTOs = stockMovementDTO.getStockDTOs();
+        for (StockDTO stockDTO : stockDTOs){
+            stockService.clientQuantity(stockDTO.getId(),stockDTO.getQuantity());
+        }
+        stockMovementRepository.save(stockMovement);
+    }
+
     private StockMovement convertToEntity(StockMovementDTO stockMovementDTO){
         StockMovement stockMovement = new StockMovement();
         stockMovement.setId(stockMovementDTO.getId());
