@@ -56,6 +56,7 @@ public class StockController {
         Stock stock = new Stock();
         stock.setId(stockDTO.getId());
         stock.setQuantity(stockDTO.getQuantity());
+        stock.setProduct(stockDTO.getProduct());
         return stock;
     }
 
@@ -63,6 +64,7 @@ public class StockController {
         StockDTO stockDTO = new StockDTO();
         stockDTO.setId(stock.getId());
         stockDTO.setQuantity(stock.getQuantity());
+        stockDTO.setProduct(stock.getProduct());
         return stockDTO;
     }
 }
