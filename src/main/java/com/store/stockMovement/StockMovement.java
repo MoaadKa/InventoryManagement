@@ -26,11 +26,11 @@ public class StockMovement {
     @OneToMany(
             cascade = CascadeType.MERGE
     )
-    @JoinColumn(
+/*    @JoinColumn(
             name = "stock_id",
             referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "stock_id_fk")
-    )
+    )*/
     private List<Stock> stocks = new ArrayList<>();
 
     @ManyToOne(
