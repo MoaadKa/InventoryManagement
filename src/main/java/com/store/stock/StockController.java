@@ -24,23 +24,22 @@ public class StockController {
     }*/
 
     @GetMapping(path = "stocks")
-    public List<StockDTO> getStocks(){
+    public List<StockDTO> getStocks() {
         return stockService.getStocks().stream().
                 map(stock -> convertToDTO(stock)).
                 collect(Collectors.toList());
     }
 
 
-
     @PostMapping(path = "create-stock")
-    public void addStock(@RequestBody StockDTO stockDTO){
+    public void addStock(@RequestBody StockDTO stockDTO) {
 
         Stock stock = convertToEntity(stockDTO);
         stockService.addStock(stock);
     }
 
     @DeleteMapping(path = "{stockId}")
-    public void deleteStock(@PathVariable(value = "stockId") Long stockId){
+    public void deleteStock(@PathVariable(value = "stockId") Long stockId) {
         stockService.deleteStock(stockId);
     }
 
@@ -48,11 +47,11 @@ public class StockController {
     public void updateStock(
             @PathVariable Long clientId,
             @RequestParam(required = false) Integer quantity
-    ){
+    ) {
         stockService.updateStock(clientId, quantity);
     }
 
-    private Stock convertToEntity(StockDTO stockDTO){
+    private Stock convertToEntity(StockDTO stockDTO) {
         Stock stock = new Stock();
         stock.setId(stockDTO.getId());
         stock.setQuantity(stockDTO.getQuantity());
@@ -60,7 +59,7 @@ public class StockController {
         return stock;
     }
 
-    private StockDTO convertToDTO(Stock stock){
+    private StockDTO convertToDTO(Stock stock) {
         StockDTO stockDTO = new StockDTO();
         stockDTO.setId(stock.getId());
         stockDTO.setQuantity(stock.getQuantity());
