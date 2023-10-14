@@ -23,6 +23,7 @@ public class Stock {
     private Integer quantity;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public Stock() {
