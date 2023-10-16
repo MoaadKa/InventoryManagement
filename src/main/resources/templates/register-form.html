@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+</head>
+<body>
+  <div align="center">
+      <h1>Product Registration</h1>
+      <form action="#" th:action="@{/add}" th:object="${product}" method="post">
+          <label>Name: </label>
+          <input type="text" th:field="*{name}" />
+
+          <button type="submit">Register</button>
+      </form>
+  </div>
+</body>
+</html>
