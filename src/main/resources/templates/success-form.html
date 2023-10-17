@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <style type="text/css">
+        span {
+                display: inline-block;
+                width: 200px;
+                margin: 5px;
+                text-align: left;
+        }
+    </style>
+</head>
+<body>
+  <div align="center">
+      <h1>Product Registered Successfully</h1>
+      <div class="form-group">
+      <span>Name: </span> <span th:text="${product.name}"></span>
+      </div>
+      <div class="form-group">
+      <span>Brand: </span> <span th:text="${product.brand}"></span>
+      </div>
+      <div class="form-group">
+      <span>Price: </span> <span th:text="${product.price}"></span>
+      </div>
+
+  </div>
+</body>
+</html>
