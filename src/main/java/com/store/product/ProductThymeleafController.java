@@ -3,9 +3,7 @@ package com.store.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +18,12 @@ public class ProductThymeleafController {
         this.productService = productService;
     }
 
+    @GetMapping
+    public String homePage(){
+
+        return "index";
+    }
+
    @GetMapping(path = "/list")
     public String listProducts(Model model){
         List<Product> products = productService.getProducts();
@@ -27,9 +31,20 @@ public class ProductThymeleafController {
         return "product-list";
    }
 
-   @GetMapping(path = "test")
-    public String test(Model model){
-        model.addAttribute("message", "Hello World!");
-        return "hello-world";
-   }
+    @GetMapping("/add")
+    public String addProduct(Model model) {
+        Product product = new Product();
+        model.addAttribute("product", product);
+
+        return "register-form";
+    }
+
+    @PostMapping("/add")
+    public String submitProduct(@ModelAttribute("product") Product product){
+        System.out.println(product);
+        productService.addProduct(product);
+
+
+        return "success-form";
+    }
 }
