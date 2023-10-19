@@ -12,10 +12,12 @@ import java.util.List;
 public class ProductThymeleafController {
 
     private final ProductService productService;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductThymeleafController(ProductService productService) {
+    public ProductThymeleafController(ProductService productService, ProductRepository productRepository) {
         this.productService = productService;
+        this.productRepository = productRepository;
     }
 
     @GetMapping
@@ -47,4 +49,15 @@ public class ProductThymeleafController {
 
         return "success-form";
     }
+
+    @GetMapping("edit/{id}")
+    public String editProduct(
+            @PathVariable("id") Long id,
+            Model model
+            ){
+        Product product = productRepository.findById(id).get();
+        model.addAttribute("product", product);
+        return "register-form";
+    }
+
 }
