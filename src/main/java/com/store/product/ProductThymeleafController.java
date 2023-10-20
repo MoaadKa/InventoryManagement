@@ -60,4 +60,14 @@ public class ProductThymeleafController {
         return "register-form";
     }
 
+    @GetMapping("delete/{id}")
+    public String deleteProduct(
+            @PathVariable("id") Long id,
+            Model model
+    ){
+        productService.deleteProduct(id);
+
+        return "redirect:/api/v2/product/list";
+    }
+
 }
