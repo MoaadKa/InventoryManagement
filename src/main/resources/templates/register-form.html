@@ -19,7 +19,7 @@
 <body>
   <div align="center" >
       <div th:if="${product.id == null}"><h1 class="p-3">Product Registration</h1></div>
-      <div th:unless="${product.id == null}"><<h1 class="p-3">Edit Product</h1></div>
+      <div th:unless="${product.id == null}"><h1 class="p-3">Edit Product</h1></div>
 
   <form action="#" th:action="@{/api/v2/product/add}" th:object="${product}" method="post"
       style="max-width: 600px; margin: 0 auto" >
