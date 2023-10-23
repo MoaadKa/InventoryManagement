@@ -57,4 +57,10 @@ public class StockThymeleafController {
         model.addAttribute("products",products);
         return "stock-form";
     }
+
+    @GetMapping("delete/{id}")
+    public String deleteStock(@PathVariable("id") Long id){
+        stockService.deleteStock(id);
+        return "redirect:/api/v2/stock/list";
+    }
 }
