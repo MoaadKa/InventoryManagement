@@ -18,6 +18,8 @@
                 <th>Product</th>
                 <th>Quantity</th>
                 <th></th>
+                <th></th>
+
             </tr>
         </thead>
         <tbody>
@@ -25,6 +27,12 @@
                 <td th:text="${stock.id}"></td>
                 <td th:text="${stock.product.name}"></td>
                 <td th:text="${stock.quantity}"></td>
+                <td>
+                    <a th:href="@{'/api/v2/stock/edit/' +${stock.id}}">Edit</a>
+                    &nbsp;
+                    <a th:href="@{'/api/v2/stock/delete/' +${stock.id}}">Delete</a>
+
+                </td>
 
                
             </tr>
