@@ -38,7 +38,7 @@ public class ProductThymeleafController {
         Product product = new Product();
         model.addAttribute("product", product);
 
-        return "register-form";
+        return "product-form";
     }
 
     @PostMapping("/add")
@@ -57,7 +57,7 @@ public class ProductThymeleafController {
             ){
         Product product = productRepository.findById(id).get();
         model.addAttribute("product", product);
-        return "register-form";
+        return "product-form";
     }
 
     @GetMapping("delete/{id}")
