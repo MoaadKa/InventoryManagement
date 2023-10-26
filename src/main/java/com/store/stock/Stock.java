@@ -10,14 +10,7 @@ import java.util.List;
 @Table(name = "stock")
 public class Stock {
     @Id
-    @SequenceGenerator(
-            name = "stock_sequence",
-            sequenceName = "stock_sequence"
-    )
-    @GeneratedValue(
-            generator = "stock_sequence",
-            strategy = GenerationType.SEQUENCE
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer quantity;
