@@ -11,14 +11,7 @@ import java.util.List;
 public class Provider {
 
     @Id
-    @SequenceGenerator(
-            name = "provider_sequence",
-            sequenceName = "provider_sequence"
-    )
-    @GeneratedValue(
-            generator = "provider_sequence",
-            strategy = GenerationType.SEQUENCE
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
