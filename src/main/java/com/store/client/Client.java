@@ -7,14 +7,7 @@ import jakarta.persistence.*;
 @Table(name = "client")
 public class Client {
     @Id
-    @SequenceGenerator(
-            name = "client_sequence",
-            sequenceName = "client_sequence"
-    )
-    @GeneratedValue(
-            generator = "client_sequence",
-            strategy = GenerationType.SEQUENCE
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
