@@ -13,14 +13,7 @@ import java.util.List;
 public class StockMovement {
 
     @Id
-    @SequenceGenerator(
-            name = "stock_sequence",
-            sequenceName = "stock_sequence"
-    )
-    @GeneratedValue(
-            generator = "stock_sequence",
-            strategy = GenerationType.SEQUENCE
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToMany(
