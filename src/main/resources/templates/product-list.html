@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Product List</title>
@@ -8,9 +8,25 @@
 </head>
 <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
 <body>
+&nbsp;
 <div class="container text-center">
     <h1>Product List</h1>
+    <br></br>
+    <div>
+        <form th:action="@{/api/v2/product/list}">
+            Filter:
+            <input type="text" name="keyword" />
+            &nbsp;
+            <input type="submit" value="Search"/>
+            &nbsp;
+            <input type="submit" value="Clear" onclick="clearFilter()"/>
+
+        </form>
+    </div>
+    &nbsp;
+
 </div>
+<div>
     <table class="table">
         <thead>
             <tr>
@@ -18,7 +34,7 @@
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Price</th>
-                <th></th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +52,12 @@
             </tr>
         </tbody>
     </table>
+</div>
+<script type="text/javascript">
+    function clearFilter(){
+    window.location = '/api/v2/product/list' ;
+    }
+</script>
 
 </body>
 </html>
