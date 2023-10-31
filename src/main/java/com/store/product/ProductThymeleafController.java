@@ -27,8 +27,9 @@ public class ProductThymeleafController {
     }
 
    @GetMapping(path = "/list")
-    public String listProducts(Model model){
-        List<Product> products = productService.getProducts();
+    public String listProducts(Model model, @RequestParam(required = false) String keyword){
+
+        List<Product> products = productService.getProducts(keyword);
         model.addAttribute("products", products);
         return "product-list";
    }
