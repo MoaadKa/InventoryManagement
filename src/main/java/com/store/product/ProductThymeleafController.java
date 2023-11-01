@@ -30,7 +30,9 @@ public class ProductThymeleafController {
     public String listProducts(Model model, @RequestParam(required = false) String keyword){
 
         List<Product> products = productService.getProducts(keyword);
-        model.addAttribute("products", products);
+       int totalProducts = products.size();
+       model.addAttribute("products", products);
+       model.addAttribute("totalProducts", totalProducts);
         return "product-list";
    }
 
