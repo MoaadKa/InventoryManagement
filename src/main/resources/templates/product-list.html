@@ -53,8 +53,21 @@
         </tbody>
     </table>
 </div>
-<div class="mx-auto" style="width: 200px;">
-    Total items: [[${totalProducts}]]
+<div class="nav justify-content-center">
+    <div>
+    Total items: [[${totalItems}]] - Page [[${currentPage}]] of [[${totalPages}]]
+    </div>
+    &nbsp;
+    <div>
+       - First Previous
+    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+        <a th:if="${i != currentPage}" th:href="@{'/api/v2/product/list/page/' + ${i}}">[[${i}]]</a>
+        <span th:unless="${i != currentPage}">[[${i}]]</span>
+
+        &nbsp;
+    </span>
+        Next Last
+    </div>
 </div>
 <script type="text/javascript">
     function clearFilter(){
