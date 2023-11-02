@@ -1,6 +1,7 @@
 package com.store.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +18,11 @@ public class ProductController {
     }
 
     @GetMapping(path = "products")
-    public List<Product> getProducts(){
-        return productService.getProducts();
+    public List<Product> getProducts(
+    ){
+        Page<Product> page = productService.getProducts(0);
+
+        return page.getContent();
     }
 
     @PostMapping(path = "createproduct")
