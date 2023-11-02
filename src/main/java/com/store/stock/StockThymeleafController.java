@@ -3,6 +3,7 @@ package com.store.stock;
 import com.store.product.Product;
 import com.store.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,8 @@ public class StockThymeleafController {
     }
     @GetMapping("add")
     public String createStock(Model model){
-        List<Product> products = productService.getProducts();
+        Page<Product> page = productService.getProducts(0);
+        List<Product> products = page.getContent();
         model.addAttribute("stock", new Stock());
         model.addAttribute("products", products);
         return "stock-form";
@@ -53,7 +55,9 @@ public class StockThymeleafController {
     ){
         Stock stock = stockRepository.findById(id).get();
         model.addAttribute("stock", stock);
-        List<Product> products = productService.getProducts();
+        Page<Product> page = productService.getProducts(0);
+
+        List<Product> products = page.getContent();
         model.addAttribute("products",products);
         return "stock-form";
     }
