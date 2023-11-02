@@ -2,6 +2,9 @@ package com.store.product;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +20,10 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getProducts(){
-        return productRepository.findAll();
+    public Page<Product> getProducts(int pageNumber){
+        Pageable pageable = PageRequest.of(pageNumber-1,5);
+
+        return productRepository.findAll(pageable);
     }
 
     public void addProduct(Product product){
