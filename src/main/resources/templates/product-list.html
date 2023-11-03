@@ -59,14 +59,24 @@
     </div>
     &nbsp;
     <div>
-       - First Previous
+       -
+        <a th:if="${currentPage>1}" th:href="@{/api/v2/product/list}">First</a>
+        <span th:unless="${currentPage>1}">First</span>
+        &nbsp;
+        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/' + ${currentPage -1}}">Previous</a>
+        <span th:unless="${currentPage>1}">Previous</span>
     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
         <a th:if="${i != currentPage}" th:href="@{'/api/v2/product/list/page/' + ${i}}">[[${i}]]</a>
         <span th:unless="${i != currentPage}">[[${i}]]</span>
 
         &nbsp;
     </span>
-        Next Last
+
+        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${currentPage +1}}">Next</a>
+        <span th:unless="${currentPage<totalPages}">Next</span>
+       &nbsp;
+        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${totalPages}}">Last</a>
+        <span th:unless="${currentPage<totalPages}">Last</span>
     </div>
 </div>
 <script type="text/javascript">
