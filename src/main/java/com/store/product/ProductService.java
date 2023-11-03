@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Page<Product> getProducts(int pageNumber){
-        Pageable pageable = PageRequest.of(pageNumber-1,5);
+    public Page<Product> getProducts(
+            int pageNumber,
+            String sortField,
+            String sortDirection
+    ){
+        Sort sort = Sort.by("name");
+        sort = sortDirection.equals("asc") ? sort.ascending() : sort.descending();
+        Pageable pageable = PageRequest.of(pageNumber-1,5, sort);
 
         return productRepository.findAll(pageable);
     }
