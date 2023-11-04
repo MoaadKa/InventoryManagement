@@ -20,7 +20,7 @@ public class ProductController {
     @GetMapping(path = "products")
     public List<Product> getProducts(
     ){
-        Page<Product> page = productService.getProducts(0);
+        Page<Product> page = productService.getProducts(0,"id", "asc");
 
         return page.getContent();
     }
