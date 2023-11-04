@@ -1,6 +1,7 @@
 package com.store.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +28,32 @@ public class ProductThymeleafController {
     }
 
    @GetMapping(path = "/list")
-    public String listProducts(Model model, @RequestParam(required = false) String keyword){
+    public String listProducts(Model model){
 
-        List<Product> products = productService.getProducts(keyword);
-       int totalProducts = products.size();
-       model.addAttribute("products", products);
-       model.addAttribute("totalProducts", totalProducts);
-        return "product-list";
+        return productPage(model,1,"id", "asc");
    }
+   @GetMapping("list/page/{pageNumber}")
+   public String productPage(
+           Model model,
+           @PathVariable("pageNumber") int currentPage,
+           @RequestParam(name = "sortField",required = false) String sortField,
+           @RequestParam(name = "sortDir", required = false) String sortDir
+   ){
+       Page<Product> page = productService.getProducts(currentPage,sortField,sortDir);
+       List<Product> products = page.getContent();
+       long totalItems = page.getTotalElements();
+       int totalPages = page.getTotalPages();
+       model.addAttribute("products", products);
+       model.addAttribute("totalItems", totalItems);
+       model.addAttribute("totalPages", totalPages);
+       model.addAttribute("currentPage", currentPage);
+       model.addAttribute("sortField",sortField);
+       model.addAttribute("sortDir", sortDir);
+       String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+       model.addAttribute("reverseSortDir", reverseSortDir);
+       return "product-list";
+   }
+
 
     @GetMapping("/add")
     public String addProduct(Model model) {
