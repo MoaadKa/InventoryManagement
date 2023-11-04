@@ -24,10 +24,10 @@ public class ProductService {
     public Page<Product> getProducts(
             int pageNumber,
             String sortField,
-            String sortDirection
+            String sortDir
     ){
-        Sort sort = Sort.by("name");
-        sort = sortDirection.equals("asc") ? sort.ascending() : sort.descending();
+        Sort sort = Sort.by(sortField);
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
         Pageable pageable = PageRequest.of(pageNumber-1,5, sort);
 
         return productRepository.findAll(pageable);
