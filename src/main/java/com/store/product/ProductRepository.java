@@ -11,8 +11,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-  /*  @Query(" SELECT p FROM Product p WHERE p.name LIKE %?1%")
-    public List<Product> findAll(String keyword);*/
 
-
+    @Query(" SELECT p FROM Product p WHERE p.name LIKE %?1%")
+    Page<Product> findAll(String keyword, Pageable pageable);
 }
