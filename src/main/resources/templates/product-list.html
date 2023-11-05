@@ -30,7 +30,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>
+                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">ID</a>
+                </th>
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Price</th>
@@ -65,8 +67,9 @@
         &nbsp;
         <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/' + ${currentPage -1}}">Previous</a>
         <span th:unless="${currentPage>1}">Previous</span>
+
     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-        <a th:if="${i != currentPage}" th:href="@{'/api/v2/product/list/page/' + ${i}}">[[${i}]]</a>
+        <a th:if="${i != currentPage}" th:href="@{'/api/v2/product/list/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
         <span th:unless="${i != currentPage}">[[${i}]]</span>
 
         &nbsp;
