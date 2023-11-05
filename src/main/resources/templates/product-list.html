@@ -62,10 +62,10 @@
     &nbsp;
     <div>
        -
-        <a th:if="${currentPage>1}" th:href="@{/api/v2/product/list}">First</a>
+        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
         <span th:unless="${currentPage>1}">First</span>
         &nbsp;
-        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/' + ${currentPage -1}}">Previous</a>
+        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/' + ${currentPage -1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
         <span th:unless="${currentPage>1}">Previous</span>
 
     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
@@ -75,10 +75,10 @@
         &nbsp;
     </span>
 
-        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${currentPage +1}}">Next</a>
+        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${currentPage +1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
         <span th:unless="${currentPage<totalPages}">Next</span>
        &nbsp;
-        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${totalPages}}">Last</a>
+        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
         <span th:unless="${currentPage<totalPages}">Last</span>
     </div>
 </div>
