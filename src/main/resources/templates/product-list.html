@@ -33,7 +33,9 @@
                 <th>
                     <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">ID</a>
                 </th>
-                <th>Name</th>
+                <th>
+                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}}">Name</a>
+                </th>
                 <th>Brand</th>
                 <th>Price</th>
                 <th>Actions</th>
