@@ -30,16 +30,18 @@ public class ProductThymeleafController {
    @GetMapping(path = "/list")
     public String listProducts(Model model){
 
-        return productPage(model,1,"id", "asc");
+        String keyword = null;
+        return productPage(model,1,"id", "asc",keyword);
    }
    @GetMapping("list/page/{pageNumber}")
    public String productPage(
            Model model,
            @PathVariable("pageNumber") int currentPage,
            @RequestParam(name = "sortField",required = false) String sortField,
-           @RequestParam(name = "sortDir", required = false) String sortDir
+           @RequestParam(name = "sortDir", required = false) String sortDir,
+           @RequestParam(name = "keyword", required = false) String keyword
    ){
-       Page<Product> page = productService.getProducts(currentPage,sortField,sortDir);
+       Page<Product> page = productService.getProducts(keyword,currentPage,sortField,sortDir);
        List<Product> products = page.getContent();
        long totalItems = page.getTotalElements();
        int totalPages = page.getTotalPages();
@@ -51,6 +53,7 @@ public class ProductThymeleafController {
        model.addAttribute("sortDir", sortDir);
        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
        model.addAttribute("reverseSortDir", reverseSortDir);
+       model.addAttribute("keyword", keyword);
        return "product-list";
    }
 
