@@ -22,6 +22,7 @@ public class ProductService {
     }
 
     public Page<Product> getProducts(
+            String keyword,
             int pageNumber,
             String sortField,
             String sortDir
@@ -29,6 +30,9 @@ public class ProductService {
         Sort sort = Sort.by(sortField);
         sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
         Pageable pageable = PageRequest.of(pageNumber-1,5, sort);
+        if (keyword != null){
+            return productRepository.findAll(keyword,pageable);
+        }
 
         return productRepository.findAll(pageable);
     }
