@@ -36,7 +36,7 @@ public class StockThymeleafController {
     }
     @GetMapping("add")
     public String createStock(Model model){
-        Page<Product> page = productService.getProducts(0,"id", "asc");
+        Page<Product> page = productService.getProducts(null,0,"id", "asc");
         List<Product> products = page.getContent();
         model.addAttribute("stock", new Stock());
         model.addAttribute("products", products);
@@ -55,7 +55,7 @@ public class StockThymeleafController {
     ){
         Stock stock = stockRepository.findById(id).get();
         model.addAttribute("stock", stock);
-        Page<Product> page = productService.getProducts(0,"id", "asc");
+        Page<Product> page = productService.getProducts(null,0,"id", "asc");
 
         List<Product> products = page.getContent();
         model.addAttribute("products",products);
