@@ -17,6 +17,9 @@
 <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
 
 <body>
+
+<div th:insert="fragments :: header"></div>
+
   <div align="center" >
       <div th:if="${product.id == null}"><h1 class="p-3">Product Registration</h1></div>
       <div th:unless="${product.id == null}"><h1 class="p-3">Edit Product</h1></div>
