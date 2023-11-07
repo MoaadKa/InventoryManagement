@@ -8,14 +8,19 @@
 </head>
 <link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css">
 <body>
+<div th:insert="fragments :: header"></div>
+
 &nbsp;
 <div class="container text-center">
     <h1>Product List</h1>
     <br></br>
     <div>
-        <form th:action="@{/api/v2/product/list}">
+        <form th:action="@{/api/v2/product/list/page/1}">
+            <input type="hidden" name="sortField" th:value="${sortField}" />
+            <input type="hidden" name="sortDir" th:value="${sortDir}" />
+
             Filter:
-            <input type="text" name="keyword" />
+            <input type="text" name="keyword" required />
             &nbsp;
             <input type="submit" value="Search"/>
             &nbsp;
@@ -31,16 +36,16 @@
         <thead>
             <tr>
                 <th>
-                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">ID</a>
+                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">Product ID</a>
                 </th>
                 <th>
-                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir}}">Name</a>
+                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=name&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : '' }}">Name</a>
                 </th>
                 <th>
-                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=brand&sortDir=' + ${reverseSortDir}}">Brand</a>
+                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=brand&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">Brand</a>
                 </th>
                 <th>
-                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">Price</a>
+                    <a th:href="@{'/api/v2/product/list/page/'+ ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">Price</a>
                 </th>
                 <th>Actions</th>
             </tr>
@@ -68,30 +73,31 @@
     &nbsp;
     <div>
        -
-        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
+        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/1' + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">First</a>
         <span th:unless="${currentPage>1}">First</span>
         &nbsp;
-        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/' + ${currentPage -1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+        <a th:if="${currentPage>1}" th:href="@{'/api/v2/product/list/page/' + ${currentPage -1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">Previous</a>
         <span th:unless="${currentPage>1}">Previous</span>
 
     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-        <a th:if="${i != currentPage}" th:href="@{'/api/v2/product/list/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+        <a th:if="${i != currentPage}" th:href="@{'/api/v2/product/list/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">[[${i}]]</a>
         <span th:unless="${i != currentPage}">[[${i}]]</span>
 
         &nbsp;
     </span>
 
-        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${currentPage +1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${currentPage +1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">Next</a>
         <span th:unless="${currentPage<totalPages}">Next</span>
        &nbsp;
-        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+        <a th:if="${currentPage<totalPages}" th:href="@{'/api/v2/product/list/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : '' } }">Last</a>
         <span th:unless="${currentPage<totalPages}">Last</span>
     </div>
 </div>
 <script type="text/javascript">
-    function clearFilter(){
-    window.location = '/api/v2/product/list' ;
+    function clearFilter() {
+         window.location = '/api/v2/product/list';
     }
+
 </script>
 
 </body>
