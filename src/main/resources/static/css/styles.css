@@ -1,4 +1,8 @@
 /* styles.css */
+h1{
+    color: floralwhite;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
