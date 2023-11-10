@@ -20,6 +20,11 @@
 
     <div class="col">
         <h1> &nbsp; &nbsp; Inventory Management API</h1>
+&nbsp;&nbsp;
+        <p>
+       &nbsp;&nbsp;&nbsp;Discover simplicity in inventory management with our API. Effortlessly organize products,
+            &nbsp;&nbsp; employ dynamic sorting, and ensure real-time updates.
+        </p>
     </div>
 
     <div class="col">
@@ -35,13 +40,17 @@
             <p>Click to create a new product</p>
         </div>
         </a>
+        <a  th:href="@{/api/v2/stock/list}">
         <div class="card card3">
-        <a  th:href="@{/api/v2/stock/list}">Stock list</a>
+         <h5> Stock list</h5>
         </div>
+        </a>
 
+        <a  th:href="@{/api/v2/stock/add}">
         <div class="card card4">
-        <a  th:href="@{/api/v2/stock/add}">Create Stock</a>
+          <h5>Create Stock</h5>
         </div>
+        </a>
     </div>
 </div>
 </body>
