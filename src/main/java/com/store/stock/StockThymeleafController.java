@@ -1,6 +1,7 @@
 package com.store.stock;
 
 import com.store.product.Product;
+import com.store.product.ProductRepository;
 import com.store.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,11 +22,14 @@ public class StockThymeleafController {
     private final ProductService productService;
     private final StockRepository stockRepository;
 
+    private final ProductRepository productRepository;
+
     @Autowired
-    public StockThymeleafController(StockService stockService, ProductService productService, StockRepository stockRepository) {
+    public StockThymeleafController(StockService stockService, ProductService productService, StockRepository stockRepository, ProductRepository productRepository) {
         this.stockService = stockService;
         this.productService = productService;
         this.stockRepository = stockRepository;
+        this.productRepository = productRepository;
     }
 
     @GetMapping("list")
@@ -36,8 +40,7 @@ public class StockThymeleafController {
     }
     @GetMapping("add")
     public String createStock(Model model){
-        Page<Product> page = productService.getProducts(null,0,"id", "asc");
-        List<Product> products = page.getContent();
+        List<Product> products = productRepository.findAll();
         model.addAttribute("stock", new Stock());
         model.addAttribute("products", products);
         return "stock-form";
